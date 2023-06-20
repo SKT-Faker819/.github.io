@@ -400,6 +400,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -434,37 +437,46 @@
 <p>&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;4. 可重复性：Docker 容器可以通过 Dockerfile 和镜像的方式进行构建，使得应用程序可以在不同的环境中以相同的方式进行构建和部署，增强了应用程序的可重复性和可维护性。</p>
 <h3 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a>Docker仓库</h3><p>&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;Docker 仓库是一个用于存储、管理和分享 Docker 镜像的中央存储库。Docker 官方提供了一个公共仓库 Docker Hub，用户可以在 Docker Hub 上搜索、下载和分享 Docker 镜像。此外，用户也可以自己搭建 Docker 仓库，用于存储和管理自己的 Docker 镜像。</p>
 <h3 id="镜像操作："><a href="#镜像操作：" class="headerlink" title="镜像操作："></a>镜像操作：</h3><ul>
-<li>docker images<br>该命令用于列出本地已经下载的 Docker 镜像，并显示它们的名称、标签、镜像 ID、大小和创建时间等信息。例如：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              18.04               4e2eef94cd6b        2 weeks ago         63.2MB</span><br><span class="line">nginx               latest              4bb46517cacd        3 weeks ago         133MB</span><br></pre></td></tr></table></figure></li>
+<li>docker images<br>该命令用于列出本地已经下载的 Docker 镜像，并显示它们的名称、标签、镜像 ID、大小和创建时间等信息。例如：<pre class="language-none"><code class="language-none">$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              18.04               4e2eef94cd6b        2 weeks ago         63.2MB
+nginx               latest              4bb46517cacd        3 weeks ago         133MB</code></pre></li>
 <li>docker search<br>该命令用于在 Docker Hub 上搜索 Docker 镜像，并显示它们的名称、描述、星级和官方&#x2F;非官方标识等信息。例如：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker search nginx</span><br><span class="line">NAME                             DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">nginx                            Official build of Nginx.                        15199               </span><br><span class="line">jwilder/nginx-proxy             Automated Nginx reverse proxy for docker con...   1377                                    </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">$ docker search nginx
+NAME                             DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+nginx                            Official build of Nginx.                        15199               
+jwilder&#x2F;nginx-proxy             Automated Nginx reverse proxy for docker con...   1377                                    
+...</code></pre>
 
 <ul>
 <li>docker pull<br>该命令用于从 Docker Hub 上下载指定的 Docker 镜像，并将其保存到本地的 Docker 镜像库中。例如：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull nginx</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">$ docker pull nginx</code></pre>
 
 <ul>
 <li>docker build<br>该命令用于根据指定的 Dockerfile 文件构建一个 Docker 镜像，并将其命名为指定的名称。例如：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t my-nginx . # dockerfile 目录</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">$ docker build -t my-nginx . # dockerfile 目录</code></pre>
 
 <ul>
-<li>docker rmi<br>该命令用于删除本地已经下载的指定的 Docker 镜像。例如：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi my-nginx</span><br></pre></td></tr></table></figure></li>
+<li>docker rmi<br>该命令用于删除本地已经下载的指定的 Docker 镜像。例如：<pre class="language-none"><code class="language-none">$ docker rmi my-nginx</code></pre></li>
 </ul>
 <h3 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h3><ul>
 <li>docker run<br>该命令用于创建并启动一个 Docker 容器。<br>常用选项：<br> <code>-d</code> 守护式启动(后台启动)容器<br> <code>-it</code> 交互式容器<br> <code>-i</code> 以交互模式运行容器，通常与-t同时使用<br> <code>-t</code> 为容器重新分配一个伪终端，通常与-i同时使用<br> <code>--name</code> 为容器指定名称<br> <code>-p</code> 指定端口 docker端口:应用端口<br> <code>-P</code> 随机分配 应用端口是应用默认端口<br> <code>-v</code>：将主机上的目录挂载到容器内部的目录。<br> <code>--env</code>：设置容器内部的环境变量</li>
 </ul>
 <p>&amp;emsp;&amp;emsp;前台方式运行容器：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx -p 8080:80 nginx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
+</code></pre>
 <p>&amp;emsp;&amp;emsp;守护式运行容器：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx -p 8080:80 nginx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
+</code></pre>
 
 <ul>
 <li>docker ps<br>该命令用于查看docker运行进程,默认显示当前正在运行的<br> 常用选项:<br> <code>-a</code> 列出当前所有正在运行的容器+历史上运行过的<br> <code>-l</code>显示最近创建的容器<br> <code>-n</code> 显示最近n个创建的容器<br> <code>-q</code> 静默模式，只显示容器编号<br> <code>--no-trunc</code> 不截断输出 说明</li>
 </ul>
 <p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">docker ps -a</code></pre>
 <ul>
 <li><p>docker start<br>  该命令用于启动已存在的容器。例如:<br> <code>docker start nginx # 容器id或name</code></p>
 </li>
@@ -538,7 +550,20 @@
  </p>
 </li>
 <li><p>Dockerfile 体系结构</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM --基础镜像</span><br><span class="line">MAINTAINER --镜像维护者的姓名和邮箱</span><br><span class="line">RUN --容器构建时需要运行的命令</span><br><span class="line">EXPOSE --当前容器应用对外暴露的端口</span><br><span class="line">WORKDIR --指定创建容器后,终端默认登录进来的工作目录</span><br><span class="line">ENV --用户构建镜像过程中设置环境变量</span><br><span class="line">ADD --将宿主机目录下的文件拷贝进镜像| ADD命令会自动处理URL和解压缩</span><br><span class="line">COPY --类似ADD,拷贝文件和目录到镜像中。将从构建上下文目录中&lt;源路径&gt;的文件/目录复制到新的一层镜像内的&lt;目标路径&gt;位置。两种写法:</span><br><span class="line">	1.COPY src dest</span><br><span class="line">	2.COPY [&quot;src&quot;,&quot;dest&quot;]	</span><br><span class="line">VOLUME --容器数据卷,用于数据保存和持久化工作</span><br><span class="line">CMD --指定一个容器启动时要运行的命令。Dockerfile中可以有多个CMD指令。但只有最后一个生效,CMD会被docker run 之后的参数替换</span><br><span class="line">ENTRYPOINT --指定一个容器启动时要运行的命令。ENTPRPOINT的目的和CMD一样,都是在指定容器启动程序及参数</span><br><span class="line">ONBUILD --当构建一个被继承的Dockerfile时运行命令,父镜像在被字镜像继承后父镜像的onbuild被触发</span><br></pre></td></tr></table></figure>
+ <pre class="language-none"><code class="language-none">FROM --基础镜像
+MAINTAINER --镜像维护者的姓名和邮箱
+RUN --容器构建时需要运行的命令
+EXPOSE --当前容器应用对外暴露的端口
+WORKDIR --指定创建容器后,终端默认登录进来的工作目录
+ENV --用户构建镜像过程中设置环境变量
+ADD --将宿主机目录下的文件拷贝进镜像| ADD命令会自动处理URL和解压缩
+COPY --类似ADD,拷贝文件和目录到镜像中。将从构建上下文目录中&lt;源路径&gt;的文件&#x2F;目录复制到新的一层镜像内的&lt;目标路径&gt;位置。两种写法:
+	1.COPY src dest
+	2.COPY [&quot;src&quot;,&quot;dest&quot;]	
+VOLUME --容器数据卷,用于数据保存和持久化工作
+CMD --指定一个容器启动时要运行的命令。Dockerfile中可以有多个CMD指令。但只有最后一个生效,CMD会被docker run 之后的参数替换
+ENTRYPOINT --指定一个容器启动时要运行的命令。ENTPRPOINT的目的和CMD一样,都是在指定容器启动程序及参数
+ONBUILD --当构建一个被继承的Dockerfile时运行命令,父镜像在被字镜像继承后父镜像的onbuild被触发</code></pre>
 
 
 </li>
@@ -546,7 +571,29 @@
 </li>
 </ul>
 <p> 示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 指定基础镜像</span><br><span class="line">FROM ubuntu:20.04</span><br><span class="line"></span><br><span class="line"># 设置工作目录</span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"># 添加文件到镜像中</span><br><span class="line">COPY . /app</span><br><span class="line"></span><br><span class="line"># 运行命令</span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get install -y nginx &amp;&amp; \</span><br><span class="line">    apt-get clean &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"># 暴露端口</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"># 设置环境变量</span><br><span class="line">ENV APP_NAME myapp</span><br><span class="line"></span><br><span class="line"># 设置启动命令</span><br><span class="line">CMD [ &quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot; ]</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none"># 指定基础镜像
+FROM ubuntu:20.04
+
+# 设置工作目录
+WORKDIR &#x2F;app
+
+# 添加文件到镜像中
+COPY . &#x2F;app
+
+# 运行命令
+RUN apt-get update &amp;&amp; \
+    apt-get install -y nginx &amp;&amp; \
+    apt-get clean &amp;&amp; \
+    rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;*
+
+# 暴露端口
+EXPOSE 80
+
+# 设置环境变量
+ENV APP_NAME myapp
+
+# 设置启动命令
+CMD [ &quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot; ]</code></pre>
 
                 
             </div>
@@ -783,6 +830,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
