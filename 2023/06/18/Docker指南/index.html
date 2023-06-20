@@ -437,46 +437,46 @@
 <p>&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;4. 可重复性：Docker 容器可以通过 Dockerfile 和镜像的方式进行构建，使得应用程序可以在不同的环境中以相同的方式进行构建和部署，增强了应用程序的可重复性和可维护性。</p>
 <h3 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a>Docker仓库</h3><p>&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;Docker 仓库是一个用于存储、管理和分享 Docker 镜像的中央存储库。Docker 官方提供了一个公共仓库 Docker Hub，用户可以在 Docker Hub 上搜索、下载和分享 Docker 镜像。此外，用户也可以自己搭建 Docker 仓库，用于存储和管理自己的 Docker 镜像。</p>
 <h3 id="镜像操作："><a href="#镜像操作：" class="headerlink" title="镜像操作："></a>镜像操作：</h3><ul>
-<li>docker images<br>该命令用于列出本地已经下载的 Docker 镜像，并显示它们的名称、标签、镜像 ID、大小和创建时间等信息。例如：<pre class="language-none"><code class="language-none">$ docker images
+<li>docker images<br>该命令用于列出本地已经下载的 Docker 镜像，并显示它们的名称、标签、镜像 ID、大小和创建时间等信息。例如：<pre class="line-numbers language-none"><code class="language-none">$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ubuntu              18.04               4e2eef94cd6b        2 weeks ago         63.2MB
-nginx               latest              4bb46517cacd        3 weeks ago         133MB</code></pre></li>
+nginx               latest              4bb46517cacd        3 weeks ago         133MB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>docker search<br>该命令用于在 Docker Hub 上搜索 Docker 镜像，并显示它们的名称、描述、星级和官方&#x2F;非官方标识等信息。例如：</li>
 </ul>
-<pre class="language-none"><code class="language-none">$ docker search nginx
+<pre class="line-numbers language-none"><code class="language-none">$ docker search nginx
 NAME                             DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 nginx                            Official build of Nginx.                        15199               
 jwilder&#x2F;nginx-proxy             Automated Nginx reverse proxy for docker con...   1377                                    
-...</code></pre>
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>docker pull<br>该命令用于从 Docker Hub 上下载指定的 Docker 镜像，并将其保存到本地的 Docker 镜像库中。例如：</li>
 </ul>
-<pre class="language-none"><code class="language-none">$ docker pull nginx</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">$ docker pull nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>docker build<br>该命令用于根据指定的 Dockerfile 文件构建一个 Docker 镜像，并将其命名为指定的名称。例如：</li>
 </ul>
-<pre class="language-none"><code class="language-none">$ docker build -t my-nginx . # dockerfile 目录</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">$ docker build -t my-nginx . # dockerfile 目录<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>docker rmi<br>该命令用于删除本地已经下载的指定的 Docker 镜像。例如：<pre class="language-none"><code class="language-none">$ docker rmi my-nginx</code></pre></li>
+<li>docker rmi<br>该命令用于删除本地已经下载的指定的 Docker 镜像。例如：<pre class="line-numbers language-none"><code class="language-none">$ docker rmi my-nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h3 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h3><ul>
 <li>docker run<br>该命令用于创建并启动一个 Docker 容器。<br>常用选项：<br> <code>-d</code> 守护式启动(后台启动)容器<br> <code>-it</code> 交互式容器<br> <code>-i</code> 以交互模式运行容器，通常与-t同时使用<br> <code>-t</code> 为容器重新分配一个伪终端，通常与-i同时使用<br> <code>--name</code> 为容器指定名称<br> <code>-p</code> 指定端口 docker端口:应用端口<br> <code>-P</code> 随机分配 应用端口是应用默认端口<br> <code>-v</code>：将主机上的目录挂载到容器内部的目录。<br> <code>--env</code>：设置容器内部的环境变量</li>
 </ul>
 <p>&amp;emsp;&amp;emsp;前台方式运行容器：</p>
-<pre class="language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>&amp;emsp;&amp;emsp;守护式运行容器：</p>
-<pre class="language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">docker run -d --name nginx -p 8080:80 nginx
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>docker ps<br>该命令用于查看docker运行进程,默认显示当前正在运行的<br> 常用选项:<br> <code>-a</code> 列出当前所有正在运行的容器+历史上运行过的<br> <code>-l</code>显示最近创建的容器<br> <code>-n</code> 显示最近n个创建的容器<br> <code>-q</code> 静默模式，只显示容器编号<br> <code>--no-trunc</code> 不截断输出 说明</li>
 </ul>
 <p>例如：</p>
-<pre class="language-none"><code class="language-none">docker ps -a</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">docker ps -a<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li><p>docker start<br>  该命令用于启动已存在的容器。例如:<br> <code>docker start nginx # 容器id或name</code></p>
 </li>
@@ -550,7 +550,7 @@ jwilder&#x2F;nginx-proxy             Automated Nginx reverse proxy for docker co
  </p>
 </li>
 <li><p>Dockerfile 体系结构</p>
- <pre class="language-none"><code class="language-none">FROM --基础镜像
+ <pre class="line-numbers language-none"><code class="language-none">FROM --基础镜像
 MAINTAINER --镜像维护者的姓名和邮箱
 RUN --容器构建时需要运行的命令
 EXPOSE --当前容器应用对外暴露的端口
@@ -563,7 +563,7 @@ COPY --类似ADD,拷贝文件和目录到镜像中。将从构建上下文目录
 VOLUME --容器数据卷,用于数据保存和持久化工作
 CMD --指定一个容器启动时要运行的命令。Dockerfile中可以有多个CMD指令。但只有最后一个生效,CMD会被docker run 之后的参数替换
 ENTRYPOINT --指定一个容器启动时要运行的命令。ENTPRPOINT的目的和CMD一样,都是在指定容器启动程序及参数
-ONBUILD --当构建一个被继承的Dockerfile时运行命令,父镜像在被字镜像继承后父镜像的onbuild被触发</code></pre>
+ONBUILD --当构建一个被继承的Dockerfile时运行命令,父镜像在被字镜像继承后父镜像的onbuild被触发<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 </li>
@@ -571,7 +571,7 @@ ONBUILD --当构建一个被继承的Dockerfile时运行命令,父镜像在被�
 </li>
 </ul>
 <p> 示例：</p>
-<pre class="language-none"><code class="language-none"># 指定基础镜像
+<pre class="line-numbers language-none"><code class="language-none"># 指定基础镜像
 FROM ubuntu:20.04
 
 # 设置工作目录
@@ -593,7 +593,7 @@ EXPOSE 80
 ENV APP_NAME myapp
 
 # 设置启动命令
-CMD [ &quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot; ]</code></pre>
+CMD [ &quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot; ]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
